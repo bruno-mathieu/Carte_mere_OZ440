@@ -16,11 +16,13 @@
 #include <stdbool.h>       /* For true/false definition */
 #include <stdio.h>
 
+
 #endif
 
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "define.h"        /* board level definitions*/
 #include "ecanpoll.h"      /* CAN library header file*/
+
 
 #include "Can_HL.h"
 
@@ -35,8 +37,8 @@ unsigned char TickCounter;
 struct CANTxFifo CANTxFifo;
 struct CANRxFifo CANRxFifo;
 
-//variabels for MOTOR drive
-
+//variables for onboard voltages measurement
+unsigned int BoardVoltage[6];
 
 
 /******************************************************************************/
@@ -64,13 +66,19 @@ void main(void)
 
     unsigned char MotorMoving;
 
+    unsigned char I2CData;
     
-    //----------------------------------------------------
+    
+
+    //------------ ----------------------------------------
     //----------  CPU internal configurations: -----------
     //----------------------------------------------------
 
     /* Configure the oscillator for the CPU */
     ConfigureOscillator();
+    __delay_ms(10);             // wait for Oscillator to be stabilized
+    __delay_ms(10);             // wait for Oscillator to be stabilized
+    __delay_ms(10);             // wait for Oscillator to be stabilized
     __delay_ms(10);             // wait for Oscillator to be stabilized
 
 
@@ -85,10 +93,11 @@ void main(void)
     // Timers configuration
     ConfigureTimers();
 
+    // I2c Peripheral configuration
+     
     //----------------------------------------------------
     //----------  Global variables initialisation --------
     //----------------------------------------------------
-
     
     // initialize CAN tx FIFO
     CANTxFifoInit();
@@ -132,7 +141,10 @@ void main(void)
 
         if(TickCounter>TICK_PERIOD)
         {
+            CLRWDT();                                 // clear watchdog timer each real time cycles
 
+            UpdateBoardVoltages();
+           
             TickCounter=0;                          // reset  tick counter to 0
 
             // ----- send sensor input states to CANFIFO each RT tick---
@@ -226,6 +238,38 @@ void main(void)
                 PutCANTxFifo(TempCANTxMsg);
             }
 
+            // ------------------  Return Internal voltage monitor to CAN if RTR message detected  ---------------------------
+
+            if( TempCANRxMsg.id == (CAN_MESSAGE_ACTUATOR_TYPE << 7 | CAN_DEVICE_ADRESS <<4 | INTERNAL_VOLTAGE_MONITOR_MESSAGE_ADRESS ) && TempCANRxMsg.flags== ECAN_RX_RTR_FRAME )
+            {
+                TempCANTxMsg.data_TX[0]=(unsigned char)(BoardVoltage[0] & 0x00FF);
+                TempCANTxMsg.data_TX[1]=(unsigned char)((BoardVoltage[0] & 0xFF00)>>8);
+                TempCANTxMsg.data_TX[2]=(unsigned char)(BoardVoltage[1] & 0x00FF);
+                TempCANTxMsg.data_TX[3]=(unsigned char)((BoardVoltage[1] & 0xFF00)>>8);
+                TempCANTxMsg.data_TX[4]=(unsigned char)(BoardVoltage[2] & 0x00FF);
+                TempCANTxMsg.data_TX[5]=(unsigned char)((BoardVoltage[2] & 0xFF00)>>8);
+                TempCANTxMsg.data_TX[6]=(unsigned char)(BoardVoltage[5] & 0x00FF);
+
+                TempCANTxMsg.dataLen= INTERNAL_VOLTAGE_MONITOR_MESSAGE_LEN;
+                TempCANTxMsg.id = (CAN_MESSAGE_ACTUATOR_TYPE << 7 | CAN_DEVICE_ADRESS <<4 | INTERNAL_VOLTAGE_MONITOR_MESSAGE_ADRESS );
+                TempCANTxMsg.flags = ECAN_TX_STD_FRAME;
+                PutCANTxFifo(TempCANTxMsg);
+            }
+            // ------------------  Return External voltage monitor to CAN if RTR message detected  ---------------------------
+
+            if( TempCANRxMsg.id == (CAN_MESSAGE_ACTUATOR_TYPE << 7 | CAN_DEVICE_ADRESS <<4 | EXTERNAL_VOLTAGE_MONITOR_MESSAGE_ADRESS ) && TempCANRxMsg.flags== ECAN_RX_RTR_FRAME )
+            {
+                TempCANTxMsg.data_TX[0]=(unsigned char)(BoardVoltage[3] & 0x00FF);
+                TempCANTxMsg.data_TX[1]=(unsigned char)((BoardVoltage[3] & 0xFF00)>>8);
+                TempCANTxMsg.data_TX[2]=(unsigned char)(BoardVoltage[4] & 0x00FF);
+                TempCANTxMsg.data_TX[3]=(unsigned char)((BoardVoltage[4] & 0xFF00)>>8);
+
+                TempCANTxMsg.dataLen= EXTERNAL_VOLTAGE_MONITOR_MESSAGE_LEN;
+                TempCANTxMsg.id = (CAN_MESSAGE_ACTUATOR_TYPE << 7 | CAN_DEVICE_ADRESS <<4 | EXTERNAL_VOLTAGE_MONITOR_MESSAGE_ADRESS );
+                TempCANTxMsg.flags = ECAN_TX_STD_FRAME;
+                PutCANTxFifo(TempCANTxMsg);
+            }
+
             // ------------------  Return motor position and status to CAN if RTR message detected  ---------------------------
 
             if( TempCANRxMsg.id == (CAN_MESSAGE_ACTUATOR_TYPE << 7 | CAN_DEVICE_ADRESS <<4 | POS_DATA_MESSAGE_ADRESS ) && TempCANRxMsg.flags== ECAN_RX_RTR_FRAME )
@@ -258,7 +302,6 @@ void main(void)
                     MotorReqPosition = TempCANRxMsg.data_RX[0];
                     NewReqPosition=TRUE;
                     NewReqOrder=FALSE;
-
                 }
                 
             }

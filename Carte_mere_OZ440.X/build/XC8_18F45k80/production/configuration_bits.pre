@@ -22137,8 +22137,8 @@ extern __nonreentrant void _delay3(unsigned char);
 #pragma config BORPWR = ZPBORMV
 
 
-#pragma config WDTEN = OFF
-#pragma config WDTPS = 1048576
+#pragma config WDTEN = SWDTDIS
+#pragma config WDTPS = 128
 
 
 #pragma config CANMX = PORTB

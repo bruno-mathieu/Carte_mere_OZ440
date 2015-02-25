@@ -17588,9 +17588,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "69
 [p x BORPWR=ZPBORMV ]
 "72
-[p x WDTEN=OFF ]
+[p x WDTEN=SWDTDIS ]
 "73
-[p x WDTPS=1048576 ]
+[p x WDTPS=128 ]
 "76
 [p x CANMX=PORTB ]
 "77

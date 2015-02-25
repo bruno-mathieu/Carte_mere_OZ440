@@ -22343,9 +22343,25 @@ void ConfigureOscillator(void);
 void ConfigureGPIO(void);
 void ConfigureInterrupts(void);
 void ConfigureTimers(void);
+void Configure_I2C(void);
+void Idle_I2C( void );
+unsigned char Read_I2C( void );
+signed char Write_I2C( unsigned char data_out );
+void Start_I2C(void);
+void Stop_I2C();
+void NotAck_I2C(void);
+
+unsigned char ReadISPPACRegister(unsigned char LocalAdress);
+void WriteISPPACRegister(unsigned char LocalAdress, unsigned char LocalData);
+
+void UpdateBoardVoltages(void);
+
 char GetActuatorPosition(void);
 
-# 32 "system.c"
+# 27 "system.c"
+extern unsigned int BoardVoltage[6];
+
+# 32
 void ConfigureOscillator(void)
 {
 
@@ -22436,6 +22452,191 @@ TMR0L = 0x1E;
 
 T0CONbits.TMR0ON = 1;
 
+}
+
+
+
+
+void UpdateBoardVoltages(void)
+{
+
+
+
+WriteISPPACRegister(0x09, 0b10000);
+_delay((unsigned long)((50)*(64000000/4000000.0)));
+BoardVoltage[0]=ReadISPPACRegister(0x08);
+BoardVoltage[0]=BoardVoltage[0]<<4;
+BoardVoltage[0]+=(ReadISPPACRegister(0x07) & 0xF0)>>4;
+BoardVoltage[0]=BoardVoltage[0]<<1;
+BoardVoltage[0]=(unsigned int)((float) BoardVoltage[0] * 5.7);
+
+
+
+WriteISPPACRegister(0x09, 0b10001);
+_delay((unsigned long)((50)*(64000000/4000000.0)));
+BoardVoltage[1]=ReadISPPACRegister(0x08);
+BoardVoltage[1]=BoardVoltage[1]<<4;
+BoardVoltage[1]+=(ReadISPPACRegister(0x07) & 0xF0)>>4;
+BoardVoltage[1]=BoardVoltage[1]<<1;
+
+
+
+WriteISPPACRegister(0x09, 0b10010);
+_delay((unsigned long)((50)*(64000000/4000000.0)));
+BoardVoltage[2]=ReadISPPACRegister(0x08);
+BoardVoltage[2]=BoardVoltage[2]<<4;
+BoardVoltage[2]+=(ReadISPPACRegister(0x07) & 0xF0)>>4;
+BoardVoltage[2]=BoardVoltage[2]<<1;
+
+
+
+WriteISPPACRegister(0x09, 0b10011);
+_delay((unsigned long)((50)*(64000000/4000000.0)));
+BoardVoltage[3]=ReadISPPACRegister(0x08);
+BoardVoltage[3]=BoardVoltage[3]<<4;
+BoardVoltage[3]+=(ReadISPPACRegister(0x07) & 0xF0)>>4;
+BoardVoltage[3]=BoardVoltage[3]<<1;
+BoardVoltage[3]=(unsigned int)((float)BoardVoltage[3]* 11.15);
+
+
+
+WriteISPPACRegister(0x09, 0b10100);
+_delay((unsigned long)((50)*(64000000/4000000.0)));
+BoardVoltage[4]=ReadISPPACRegister(0x08);
+BoardVoltage[4]=BoardVoltage[4]<<4;
+BoardVoltage[4]+=(ReadISPPACRegister(0x07) & 0xF0)>>4;
+BoardVoltage[4]=BoardVoltage[4]<<1;
+
+
+
+BoardVoltage[5]= ~ReadISPPACRegister(0x06);
+BoardVoltage[5]= ( BoardVoltage[5] & 0x000C) >> 2;
+
+}
+
+# 188
+unsigned char ReadISPPACRegister(unsigned char LocalAdress)
+{
+unsigned char I2CData;
+
+
+
+Configure_I2C();
+Idle_I2C();
+Start_I2C();
+Idle_I2C();
+Write_I2C(0x00<<1 | 0);
+Idle_I2C();
+
+Write_I2C(LocalAdress);
+Idle_I2C();
+NotAck_I2C();
+Idle_I2C();
+Stop_I2C();
+
+
+
+Configure_I2C();
+Idle_I2C();
+Start_I2C();
+Idle_I2C();
+Write_I2C(0x00<<1 | 1);
+Idle_I2C();
+
+I2CData=Read_I2C();
+Idle_I2C();
+NotAck_I2C();
+Idle_I2C();
+Stop_I2C();
+
+return I2CData;
+
+}
+
+void WriteISPPACRegister(unsigned char LocalAdress, unsigned char LocalData)
+{
+
+Configure_I2C();
+Idle_I2C();
+Start_I2C();
+Idle_I2C();
+Write_I2C(0x00<<1 | 0);
+Idle_I2C();
+
+Write_I2C(LocalAdress);
+Idle_I2C();
+Write_I2C(LocalData);
+Idle_I2C();
+NotAck_I2C();
+Idle_I2C();
+Stop_I2C();
+
+}
+
+# 250
+void Configure_I2C(void)
+{
+SSPSTAT &= 0x3F;
+SSPCON1 = 0x00;
+SSPCON2 = 0x00;
+SSPCON1 |= 0x8;
+SSPSTATbits.SMP=1;
+
+PORTCbits.RC3 = 1;
+PORTCbits.RC4 = 1;
+
+SSPCON1bits.SSPEN = 1;
+SSPADD = 0x54;
+}
+
+void Idle_I2C( void )
+{
+while ( ( SSPCON2 & 0x1F ) || ( SSPSTATbits.R_W ) )
+continue;
+}
+
+unsigned char Read_I2C( void )
+{
+Idle_I2C();
+SSPCON2bits.RCEN = 1;
+while ( !SSPSTATbits.BF );
+return ( SSPBUF );
+}
+
+signed char Write_I2C( unsigned char data_out )
+{
+SSPBUF = data_out;
+if ( SSPCON1bits.WCOL )
+return ( -1 );
+else
+{
+while( SSPSTATbits.BF );
+Idle_I2C();
+if ( SSPCON2bits.ACKSTAT )
+return ( -2 );
+else return ( 0 );
+
+
+}
+}
+
+void Start_I2C(void)
+{
+SSPCON2bits.SEN=1;
+while(SSPCON2bits.SEN);
+}
+
+void Stop_I2C()
+{
+SSPCON2bits.PEN=1;
+while(SSPCON2bits.PEN);
+}
+
+void NotAck_I2C(void)
+{
+SSPCON2bits.ACKDT=1;
+SSPCON2bits.ACKEN=1;
+while(SSPCON2bits.ACKEN);
 }
 
 char GetActuatorPosition(void)

@@ -69,8 +69,8 @@
 #pragma config BORPWR = ZPBORMV // BORMV Power level (ZPBORMV instead of BORMV is selected)
 
 // CONFIG2H
-#pragma config WDTEN = OFF      // Watchdog Timer (WDT disabled in hardware; SWDTEN bit disabled)
-#pragma config WDTPS = 1048576  // Watchdog Postscaler (1:1048576)
+#pragma config WDTEN = SWDTDIS  // Watchdog Timer (WDT enabled in hardware; SWDTEN bit disabled)
+#pragma config WDTPS = 128      // Watchdog Postscaler (1:128)
 
 // CONFIG3H
 #pragma config CANMX = PORTB    // ECAN Mux bit (ECAN TX and RX pins are located on RB2 and RB3, respectively)

@@ -17725,7 +17725,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 75: void ConfigureGPIO(void);
 [; ;system.h: 76: void ConfigureInterrupts(void);
 [; ;system.h: 77: void ConfigureTimers(void);
-[; ;system.h: 78: char GetActuatorPosition(void);
+[; ;system.h: 78: void Configure_I2C(void);
+[; ;system.h: 79: void Idle_I2C( void );
+[; ;system.h: 80: unsigned char Read_I2C( void );
+[; ;system.h: 81: signed char Write_I2C( unsigned char data_out );
+[; ;system.h: 82: void Start_I2C(void);
+[; ;system.h: 83: void Stop_I2C();
+[; ;system.h: 84: void NotAck_I2C(void);
+[; ;system.h: 86: unsigned char ReadISPPACRegister(unsigned char LocalAdress);
+[; ;system.h: 87: void WriteISPPACRegister(unsigned char LocalAdress, unsigned char LocalData);
+[; ;system.h: 89: void UpdateBoardVoltages(void);
+[; ;system.h: 91: char GetActuatorPosition(void);
 [; ;Can_HL.h: 24: void CANTxFifoInit(void);
 [; ;Can_HL.h: 25: void CANRxFifoInit(void);
 [; ;Can_HL.h: 27: void PutCANTxFifo(struct CANTxMsg PutMessage);

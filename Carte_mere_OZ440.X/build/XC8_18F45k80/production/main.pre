@@ -22406,6 +22406,19 @@ void ConfigureOscillator(void);
 void ConfigureGPIO(void);
 void ConfigureInterrupts(void);
 void ConfigureTimers(void);
+void Configure_I2C(void);
+void Idle_I2C( void );
+unsigned char Read_I2C( void );
+signed char Write_I2C( unsigned char data_out );
+void Start_I2C(void);
+void Stop_I2C();
+void NotAck_I2C(void);
+
+unsigned char ReadISPPACRegister(unsigned char LocalAdress);
+void WriteISPPACRegister(unsigned char LocalAdress, unsigned char LocalData);
+
+void UpdateBoardVoltages(void);
+
 char GetActuatorPosition(void);
 
 # 24 "Can_HL.h"
@@ -22419,14 +22432,17 @@ struct CANRxMsg GetCANRxFifo(void);
 
 void ECANFiltersInit(void);
 
-# 32 "main.c"
+# 34 "main.c"
 unsigned char TickCounter;
 
 
 struct CANTxFifo CANTxFifo;
 struct CANRxFifo CANRxFifo;
 
-# 46
+
+unsigned int BoardVoltage[6];
+
+# 48
 void main(void)
 {
 char TempVar;
@@ -22448,8 +22464,13 @@ unsigned char NewReqPosition;
 
 unsigned char MotorMoving;
 
-# 73
+unsigned char I2CData;
+
+# 78
 ConfigureOscillator();
+_delay((unsigned long)((10)*(64000000/4000.0)));
+_delay((unsigned long)((10)*(64000000/4000.0)));
+_delay((unsigned long)((10)*(64000000/4000.0)));
 _delay((unsigned long)((10)*(64000000/4000.0)));
 
 
@@ -22464,7 +22485,7 @@ ECANFiltersInit();
 
 ConfigureTimers();
 
-# 94
+# 103
 CANTxFifoInit();
 CANRxFifoInit();
 
@@ -22478,16 +22499,19 @@ NewReqPosition=0;
 
 MotorMoving=0;
 
-# 119
+# 128
 ConfigureInterrupts();
 
-# 126
+# 135
 while(1)
 {
 
-# 133
+# 142
 if(TickCounter>1)
 {
+asm(" clrwdt");
+
+UpdateBoardVoltages();
 
 TickCounter=0;
 
@@ -22556,7 +22580,7 @@ NewReqPosition=0;
 
 }
 
-# 213
+# 225
 if(!CANRxFifo.FifoEmpty && !CANTxFifo.Fifofull)
 {
 TempCANRxMsg = GetCANRxFifo();
@@ -22566,9 +22590,41 @@ TempCANRxMsg = GetCANRxFifo();
 if( TempCANRxMsg.id == (8 << 7 | 0 <<4 | 0x5 ) && TempCANRxMsg.flags== ECAN_RX_RTR_FRAME )
 {
 TempCANTxMsg.data_TX[0]=1;
-TempCANTxMsg.data_TX[1]=0;
+TempCANTxMsg.data_TX[1]=1;
 TempCANTxMsg.dataLen= 2;
 TempCANTxMsg.id = (8 << 7 | 0 <<4 | 0x5 );
+TempCANTxMsg.flags = ECAN_TX_STD_FRAME;
+PutCANTxFifo(TempCANTxMsg);
+}
+
+
+
+if( TempCANRxMsg.id == (8 << 7 | 0 <<4 | 0x6 ) && TempCANRxMsg.flags== ECAN_RX_RTR_FRAME )
+{
+TempCANTxMsg.data_TX[0]=(unsigned char)(BoardVoltage[0] & 0x00FF);
+TempCANTxMsg.data_TX[1]=(unsigned char)((BoardVoltage[0] & 0xFF00)>>8);
+TempCANTxMsg.data_TX[2]=(unsigned char)(BoardVoltage[1] & 0x00FF);
+TempCANTxMsg.data_TX[3]=(unsigned char)((BoardVoltage[1] & 0xFF00)>>8);
+TempCANTxMsg.data_TX[4]=(unsigned char)(BoardVoltage[2] & 0x00FF);
+TempCANTxMsg.data_TX[5]=(unsigned char)((BoardVoltage[2] & 0xFF00)>>8);
+TempCANTxMsg.data_TX[6]=(unsigned char)(BoardVoltage[5] & 0x00FF);
+
+TempCANTxMsg.dataLen= 7;
+TempCANTxMsg.id = (8 << 7 | 0 <<4 | 0x6 );
+TempCANTxMsg.flags = ECAN_TX_STD_FRAME;
+PutCANTxFifo(TempCANTxMsg);
+}
+
+
+if( TempCANRxMsg.id == (8 << 7 | 0 <<4 | 0x7 ) && TempCANRxMsg.flags== ECAN_RX_RTR_FRAME )
+{
+TempCANTxMsg.data_TX[0]=(unsigned char)(BoardVoltage[3] & 0x00FF);
+TempCANTxMsg.data_TX[1]=(unsigned char)((BoardVoltage[3] & 0xFF00)>>8);
+TempCANTxMsg.data_TX[2]=(unsigned char)(BoardVoltage[4] & 0x00FF);
+TempCANTxMsg.data_TX[3]=(unsigned char)((BoardVoltage[4] & 0xFF00)>>8);
+
+TempCANTxMsg.dataLen= 4;
+TempCANTxMsg.id = (8 << 7 | 0 <<4 | 0x7 );
 TempCANTxMsg.flags = ECAN_TX_STD_FRAME;
 PutCANTxFifo(TempCANTxMsg);
 }
@@ -22605,7 +22661,6 @@ if(TempCANRxMsg.data_RX[0]>=0 && TempCANRxMsg.data_RX[0]<=100)
 MotorReqPosition = TempCANRxMsg.data_RX[0];
 NewReqPosition=1;
 NewReqOrder=0;
-
 }
 
 }
@@ -22660,7 +22715,7 @@ LATDbits.LATD5=0;
 
 }
 
-# 321
+# 364
 if(!CANTxFifo.FifoEmpty && !TXB0CONbits.TXREQ)
 {
 TempCANTxMsg=GetCANTxFifo();

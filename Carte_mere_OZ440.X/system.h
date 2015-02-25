@@ -75,4 +75,17 @@ void ConfigureOscillator(void);     /* Handles clock switching/osc initializatio
 void ConfigureGPIO(void);           /* Handles GPIO configuration*/
 void ConfigureInterrupts(void);     /* Handles Interrupts configuration*/
 void ConfigureTimers(void);         /* handles timers configuration*/
+void Configure_I2C(void);            /* handles I2C configuration*/
+void Idle_I2C( void );
+unsigned char Read_I2C( void );
+signed char Write_I2C( unsigned char data_out );
+void Start_I2C(void);
+void Stop_I2C();
+void NotAck_I2C(void);
+
+unsigned char ReadISPPACRegister(unsigned char LocalAdress);
+void WriteISPPACRegister(unsigned char LocalAdress, unsigned char LocalData);
+
+void UpdateBoardVoltages(void);
+
 char GetActuatorPosition(void);     /*returns actuator position in % : 0%--> retracted / 100%--> extended */

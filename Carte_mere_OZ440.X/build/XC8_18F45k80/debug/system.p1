@@ -215,6 +215,104 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR0H `Vuc ~T0 @X0 0 e@4055 ]
 "39296
 [v _TMR0L `Vuc ~T0 @X0 0 e@4054 ]
+"87 system.h
+[v _WriteISPPACRegister `(v ~T0 @X0 0 ef2`uc`uc ]
+[v F19259 `(v ~T0 @X0 1 tf1`ul ]
+"147 C:\Program Files (x86)\Microchip\xc8\v1.30\include\pic18.h
+[v __delay `JF19259 ~T0 @X0 0 e ]
+[p i __delay ]
+"27 system.c
+[v _BoardVoltage `ui ~T0 @X0 -> 0 `x e ]
+"86 system.h
+[v _ReadISPPACRegister `(uc ~T0 @X0 0 ef1`uc ]
+"78
+[v _Configure_I2C `(v ~T0 @X0 0 ef ]
+"79
+[v _Idle_I2C `(v ~T0 @X0 0 ef ]
+"82
+[v _Start_I2C `(v ~T0 @X0 0 ef ]
+"81
+[v _Write_I2C `(c ~T0 @X0 0 ef1`uc ]
+"84
+[v _NotAck_I2C `(v ~T0 @X0 0 ef ]
+"83
+[v _Stop_I2C `(v ~T0 @X0 0 ef ]
+"80
+[v _Read_I2C `(uc ~T0 @X0 0 ef ]
+"38172 C:\Program Files (x86)\Microchip\xc8\v1.30\include\pic18f45k80.h
+[v _SSPSTAT `Vuc ~T0 @X0 0 e@4039 ]
+"38103
+[v _SSPCON1 `Vuc ~T0 @X0 0 e@4038 ]
+"38009
+[v _SSPCON2 `Vuc ~T0 @X0 0 e@4037 ]
+[s S2456 :2 `uc 1 :1 `uc 1 ]
+[n S2456 . . R_NOT_W ]
+[s S2457 :5 `uc 1 :1 `uc 1 ]
+[n S2457 . . D_NOT_A ]
+[s S2458 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2458 . BF UA R_nW S P D_nA CKE SMP ]
+[s S2459 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S2459 . . R_W . D_A ]
+[s S2460 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S2460 . . nW . nA ]
+[s S2461 :2 `uc 1 :1 `uc 1 ]
+[n S2461 . . NOT_WRITE ]
+[s S2462 :5 `uc 1 :1 `uc 1 ]
+[n S2462 . . NOT_ADDRESS ]
+[s S2463 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S2463 . . nWRITE . nADDRESS ]
+[s S2464 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S2464 . . READ_WRITE . DATA_ADDRESS ]
+[s S2465 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2465 . . I2C_READ I2C_START I2C_STOP I2C_DAT ]
+[s S2466 :5 `uc 1 :1 `uc 1 ]
+[n S2466 . . DA ]
+[s S2467 :2 `uc 1 :1 `uc 1 ]
+[n S2467 . . RW ]
+[s S2468 :3 `uc 1 :1 `uc 1 ]
+[n S2468 . . START ]
+[s S2469 :4 `uc 1 :1 `uc 1 ]
+[n S2469 . . STOP ]
+[s S2470 :2 `uc 1 :1 `uc 1 ]
+[n S2470 . . NOT_W ]
+[s S2471 :5 `uc 1 :1 `uc 1 ]
+[n S2471 . . NOT_A ]
+[u S2455 `S2456 1 `S2457 1 `S2458 1 `S2459 1 `S2460 1 `S2461 1 `S2462 1 `S2463 1 `S2464 1 `S2465 1 `S2466 1 `S2467 1 `S2468 1 `S2469 1 `S2470 1 `S2471 1 ]
+[n S2455 . . . . . . . . . . . . . . . . . ]
+"38260
+[v _SSPSTATbits `VS2455 ~T0 @X0 0 e@4039 ]
+[s S2134 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2134 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
+[s S2135 :1 `uc 1 :1 `uc 1 ]
+[n S2135 . . CCP2 ]
+[s S2136 :2 `uc 1 :1 `uc 1 ]
+[n S2136 . . PA1 ]
+[s S2137 :1 `uc 1 :1 `uc 1 ]
+[n S2137 . . PA2 ]
+[u S2133 `S2134 1 `S2135 1 `S2136 1 `S2137 1 ]
+[n S2133 . . . . . ]
+"32783
+[v _PORTCbits `VS2133 ~T0 @X0 0 e@3970 ]
+[s S2453 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2453 . SSPM CKP SSPEN SSPOV WCOL ]
+[s S2454 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2454 . SSPM0 SSPM1 SSPM2 SSPM3 ]
+[u S2452 `S2453 1 `S2454 1 ]
+[n S2452 . . . ]
+"38123
+[v _SSPCON1bits `VS2452 ~T0 @X0 0 e@4038 ]
+"38414
+[v _SSPADD `Vuc ~T0 @X0 0 e@4040 ]
+[s S2450 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2450 . SEN RSEN PEN RCEN ACKEN ACKDT ACKSTAT GCEN ]
+[s S2451 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2451 . . ADMSK1 ADMSK2 ADMSK3 ADMSK4 ADMSK5 ]
+[u S2449 `S2450 1 `S2451 1 ]
+[n S2449 . . . ]
+"38034
+[v _SSPCON2bits `VS2449 ~T0 @X0 0 e@4037 ]
+"38483
+[v _SSPBUF `Vuc ~T0 @X0 0 e@4041 ]
 "37990
 [v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
 "37971
@@ -17906,7 +18004,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 75: void ConfigureGPIO(void);
 [; ;system.h: 76: void ConfigureInterrupts(void);
 [; ;system.h: 77: void ConfigureTimers(void);
-[; ;system.h: 78: char GetActuatorPosition(void);
+[; ;system.h: 78: void Configure_I2C(void);
+[; ;system.h: 79: void Idle_I2C( void );
+[; ;system.h: 80: unsigned char Read_I2C( void );
+[; ;system.h: 81: signed char Write_I2C( unsigned char data_out );
+[; ;system.h: 82: void Start_I2C(void);
+[; ;system.h: 83: void Stop_I2C();
+[; ;system.h: 84: void NotAck_I2C(void);
+[; ;system.h: 86: unsigned char ReadISPPACRegister(unsigned char LocalAdress);
+[; ;system.h: 87: void WriteISPPACRegister(unsigned char LocalAdress, unsigned char LocalData);
+[; ;system.h: 89: void UpdateBoardVoltages(void);
+[; ;system.h: 91: char GetActuatorPosition(void);
+[; ;system.c: 27: extern unsigned int BoardVoltage[6];
 "32 system.c
 [v _ConfigureOscillator `(v ~T0 @X0 1 ef ]
 "33
@@ -18108,51 +18217,528 @@ Version 3.2 HI-TECH Software Intermediate Code
 "122
 [e :UE 2676 ]
 }
-"124
-[v _GetActuatorPosition `(uc ~T0 @X0 1 ef ]
-"125
+"127
+[v _UpdateBoardVoltages `(v ~T0 @X0 1 ef ]
+"128
 {
-[; ;system.c: 124: char GetActuatorPosition(void)
-[; ;system.c: 125: {
+[; ;system.c: 127: void UpdateBoardVoltages(void)
+[; ;system.c: 128: {
+[e :U _UpdateBoardVoltages ]
+[f ]
+[; ;system.c: 132: WriteISPPACRegister(0x09, 0b10000);
+"132
+[e ( _WriteISPPACRegister (2 , -> -> 9 `i `uc -> -> 16 `i `uc ]
+[; ;system.c: 133: _delay((unsigned long)((50)*(64000000/4000000.0)));
+"133
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 64000000 `l `d .4000000.0 `ul ]
+[; ;system.c: 134: BoardVoltage[0]=ReadISPPACRegister(0x08);
+"134
+[e = *U + &U _BoardVoltage * -> -> -> 0 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> ( _ReadISPPACRegister (1 -> -> 8 `i `uc `ui ]
+[; ;system.c: 135: BoardVoltage[0]=BoardVoltage[0]<<4;
+"135
+[e = *U + &U _BoardVoltage * -> -> -> 0 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux << *U + &U _BoardVoltage * -> -> -> 0 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> 4 `i ]
+[; ;system.c: 136: BoardVoltage[0]+=(ReadISPPACRegister(0x07) & 0xF0)>>4;
+"136
+[e =+ *U + &U _BoardVoltage * -> -> -> 0 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> >> & -> ( _ReadISPPACRegister (1 -> -> 7 `i `uc `i -> 240 `i -> 4 `i `ui ]
+[; ;system.c: 137: BoardVoltage[0]=BoardVoltage[0]<<1;
+"137
+[e = *U + &U _BoardVoltage * -> -> -> 0 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux << *U + &U _BoardVoltage * -> -> -> 0 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> 1 `i ]
+[; ;system.c: 138: BoardVoltage[0]=(unsigned int)((float) BoardVoltage[0] * 5.7);
+"138
+[e = *U + &U _BoardVoltage * -> -> -> 0 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> * -> -> *U + &U _BoardVoltage * -> -> -> 0 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux `f `d .5.7 `ui ]
+[; ;system.c: 142: WriteISPPACRegister(0x09, 0b10001);
+"142
+[e ( _WriteISPPACRegister (2 , -> -> 9 `i `uc -> -> 17 `i `uc ]
+[; ;system.c: 143: _delay((unsigned long)((50)*(64000000/4000000.0)));
+"143
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 64000000 `l `d .4000000.0 `ul ]
+[; ;system.c: 144: BoardVoltage[1]=ReadISPPACRegister(0x08);
+"144
+[e = *U + &U _BoardVoltage * -> -> -> 1 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> ( _ReadISPPACRegister (1 -> -> 8 `i `uc `ui ]
+[; ;system.c: 145: BoardVoltage[1]=BoardVoltage[1]<<4;
+"145
+[e = *U + &U _BoardVoltage * -> -> -> 1 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux << *U + &U _BoardVoltage * -> -> -> 1 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> 4 `i ]
+[; ;system.c: 146: BoardVoltage[1]+=(ReadISPPACRegister(0x07) & 0xF0)>>4;
+"146
+[e =+ *U + &U _BoardVoltage * -> -> -> 1 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> >> & -> ( _ReadISPPACRegister (1 -> -> 7 `i `uc `i -> 240 `i -> 4 `i `ui ]
+[; ;system.c: 147: BoardVoltage[1]=BoardVoltage[1]<<1;
+"147
+[e = *U + &U _BoardVoltage * -> -> -> 1 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux << *U + &U _BoardVoltage * -> -> -> 1 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> 1 `i ]
+[; ;system.c: 151: WriteISPPACRegister(0x09, 0b10010);
+"151
+[e ( _WriteISPPACRegister (2 , -> -> 9 `i `uc -> -> 18 `i `uc ]
+[; ;system.c: 152: _delay((unsigned long)((50)*(64000000/4000000.0)));
+"152
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 64000000 `l `d .4000000.0 `ul ]
+[; ;system.c: 153: BoardVoltage[2]=ReadISPPACRegister(0x08);
+"153
+[e = *U + &U _BoardVoltage * -> -> -> 2 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> ( _ReadISPPACRegister (1 -> -> 8 `i `uc `ui ]
+[; ;system.c: 154: BoardVoltage[2]=BoardVoltage[2]<<4;
+"154
+[e = *U + &U _BoardVoltage * -> -> -> 2 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux << *U + &U _BoardVoltage * -> -> -> 2 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> 4 `i ]
+[; ;system.c: 155: BoardVoltage[2]+=(ReadISPPACRegister(0x07) & 0xF0)>>4;
+"155
+[e =+ *U + &U _BoardVoltage * -> -> -> 2 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> >> & -> ( _ReadISPPACRegister (1 -> -> 7 `i `uc `i -> 240 `i -> 4 `i `ui ]
+[; ;system.c: 156: BoardVoltage[2]=BoardVoltage[2]<<1;
+"156
+[e = *U + &U _BoardVoltage * -> -> -> 2 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux << *U + &U _BoardVoltage * -> -> -> 2 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> 1 `i ]
+[; ;system.c: 160: WriteISPPACRegister(0x09, 0b10011);
+"160
+[e ( _WriteISPPACRegister (2 , -> -> 9 `i `uc -> -> 19 `i `uc ]
+[; ;system.c: 161: _delay((unsigned long)((50)*(64000000/4000000.0)));
+"161
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 64000000 `l `d .4000000.0 `ul ]
+[; ;system.c: 162: BoardVoltage[3]=ReadISPPACRegister(0x08);
+"162
+[e = *U + &U _BoardVoltage * -> -> -> 3 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> ( _ReadISPPACRegister (1 -> -> 8 `i `uc `ui ]
+[; ;system.c: 163: BoardVoltage[3]=BoardVoltage[3]<<4;
+"163
+[e = *U + &U _BoardVoltage * -> -> -> 3 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux << *U + &U _BoardVoltage * -> -> -> 3 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> 4 `i ]
+[; ;system.c: 164: BoardVoltage[3]+=(ReadISPPACRegister(0x07) & 0xF0)>>4;
+"164
+[e =+ *U + &U _BoardVoltage * -> -> -> 3 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> >> & -> ( _ReadISPPACRegister (1 -> -> 7 `i `uc `i -> 240 `i -> 4 `i `ui ]
+[; ;system.c: 165: BoardVoltage[3]=BoardVoltage[3]<<1;
+"165
+[e = *U + &U _BoardVoltage * -> -> -> 3 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux << *U + &U _BoardVoltage * -> -> -> 3 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> 1 `i ]
+[; ;system.c: 166: BoardVoltage[3]=(unsigned int)((float)BoardVoltage[3]* 11.15);
+"166
+[e = *U + &U _BoardVoltage * -> -> -> 3 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> * -> -> *U + &U _BoardVoltage * -> -> -> 3 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux `f `d .11.15 `ui ]
+[; ;system.c: 170: WriteISPPACRegister(0x09, 0b10100);
+"170
+[e ( _WriteISPPACRegister (2 , -> -> 9 `i `uc -> -> 20 `i `uc ]
+[; ;system.c: 171: _delay((unsigned long)((50)*(64000000/4000000.0)));
+"171
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 64000000 `l `d .4000000.0 `ul ]
+[; ;system.c: 172: BoardVoltage[4]=ReadISPPACRegister(0x08);
+"172
+[e = *U + &U _BoardVoltage * -> -> -> 4 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> ( _ReadISPPACRegister (1 -> -> 8 `i `uc `ui ]
+[; ;system.c: 173: BoardVoltage[4]=BoardVoltage[4]<<4;
+"173
+[e = *U + &U _BoardVoltage * -> -> -> 4 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux << *U + &U _BoardVoltage * -> -> -> 4 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> 4 `i ]
+[; ;system.c: 174: BoardVoltage[4]+=(ReadISPPACRegister(0x07) & 0xF0)>>4;
+"174
+[e =+ *U + &U _BoardVoltage * -> -> -> 4 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> >> & -> ( _ReadISPPACRegister (1 -> -> 7 `i `uc `i -> 240 `i -> 4 `i `ui ]
+[; ;system.c: 175: BoardVoltage[4]=BoardVoltage[4]<<1;
+"175
+[e = *U + &U _BoardVoltage * -> -> -> 4 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux << *U + &U _BoardVoltage * -> -> -> 4 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> 1 `i ]
+[; ;system.c: 179: BoardVoltage[5]= ~ReadISPPACRegister(0x06);
+"179
+[e = *U + &U _BoardVoltage * -> -> -> 5 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> ~ -> ( _ReadISPPACRegister (1 -> -> 6 `i `uc `i `ui ]
+[; ;system.c: 180: BoardVoltage[5]= ( BoardVoltage[5] & 0x000C) >> 2;
+"180
+[e = *U + &U _BoardVoltage * -> -> -> 5 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux >> & *U + &U _BoardVoltage * -> -> -> 5 `i `ui `ux -> -> # *U &U _BoardVoltage `ui `ux -> -> 12 `i `ui -> 2 `i ]
+[; ;system.c: 182: }
+"182
+[e :UE 2677 ]
+}
+"188
+[v _ReadISPPACRegister `(uc ~T0 @X0 1 ef1`uc ]
+"189
+{
+[; ;system.c: 188: unsigned char ReadISPPACRegister(unsigned char LocalAdress)
+[; ;system.c: 189: {
+[e :U _ReadISPPACRegister ]
+"188
+[v _LocalAdress `uc ~T0 @X0 1 r1 ]
+"189
+[f ]
+"190
+[v _I2CData `uc ~T0 @X0 1 a ]
+[; ;system.c: 190: unsigned char I2CData;
+[; ;system.c: 194: Configure_I2C();
+"194
+[e ( _Configure_I2C ..  ]
+[; ;system.c: 195: Idle_I2C();
+"195
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 196: Start_I2C();
+"196
+[e ( _Start_I2C ..  ]
+[; ;system.c: 197: Idle_I2C();
+"197
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 198: Write_I2C(0x00<<1 | 0);
+"198
+[e ( _Write_I2C (1 -> | << -> 0 `i -> 1 `i -> 0 `i `uc ]
+[; ;system.c: 199: Idle_I2C();
+"199
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 201: Write_I2C(LocalAdress);
+"201
+[e ( _Write_I2C (1 _LocalAdress ]
+[; ;system.c: 202: Idle_I2C();
+"202
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 203: NotAck_I2C();
+"203
+[e ( _NotAck_I2C ..  ]
+[; ;system.c: 204: Idle_I2C();
+"204
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 205: Stop_I2C();
+"205
+[e ( _Stop_I2C ..  ]
+[; ;system.c: 209: Configure_I2C();
+"209
+[e ( _Configure_I2C ..  ]
+[; ;system.c: 210: Idle_I2C();
+"210
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 211: Start_I2C();
+"211
+[e ( _Start_I2C ..  ]
+[; ;system.c: 212: Idle_I2C();
+"212
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 213: Write_I2C(0x00<<1 | 1);
+"213
+[e ( _Write_I2C (1 -> | << -> 0 `i -> 1 `i -> 1 `i `uc ]
+[; ;system.c: 214: Idle_I2C();
+"214
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 216: I2CData=Read_I2C();
+"216
+[e = _I2CData ( _Read_I2C ..  ]
+[; ;system.c: 217: Idle_I2C();
+"217
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 218: NotAck_I2C();
+"218
+[e ( _NotAck_I2C ..  ]
+[; ;system.c: 219: Idle_I2C();
+"219
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 220: Stop_I2C();
+"220
+[e ( _Stop_I2C ..  ]
+[; ;system.c: 222: return I2CData;
+"222
+[e ) _I2CData ]
+[e $UE 2678  ]
+[; ;system.c: 224: }
+"224
+[e :UE 2678 ]
+}
+"226
+[v _WriteISPPACRegister `(v ~T0 @X0 1 ef2`uc`uc ]
+"227
+{
+[; ;system.c: 226: void WriteISPPACRegister(unsigned char LocalAdress, unsigned char LocalData)
+[; ;system.c: 227: {
+[e :U _WriteISPPACRegister ]
+"226
+[v _LocalAdress `uc ~T0 @X0 1 r1 ]
+[v _LocalData `uc ~T0 @X0 1 r2 ]
+"227
+[f ]
+[; ;system.c: 229: Configure_I2C();
+"229
+[e ( _Configure_I2C ..  ]
+[; ;system.c: 230: Idle_I2C();
+"230
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 231: Start_I2C();
+"231
+[e ( _Start_I2C ..  ]
+[; ;system.c: 232: Idle_I2C();
+"232
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 233: Write_I2C(0x00<<1 | 0);
+"233
+[e ( _Write_I2C (1 -> | << -> 0 `i -> 1 `i -> 0 `i `uc ]
+[; ;system.c: 234: Idle_I2C();
+"234
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 236: Write_I2C(LocalAdress);
+"236
+[e ( _Write_I2C (1 _LocalAdress ]
+[; ;system.c: 237: Idle_I2C();
+"237
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 238: Write_I2C(LocalData);
+"238
+[e ( _Write_I2C (1 _LocalData ]
+[; ;system.c: 239: Idle_I2C();
+"239
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 240: NotAck_I2C();
+"240
+[e ( _NotAck_I2C ..  ]
+[; ;system.c: 241: Idle_I2C();
+"241
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 242: Stop_I2C();
+"242
+[e ( _Stop_I2C ..  ]
+[; ;system.c: 244: }
+"244
+[e :UE 2679 ]
+}
+"250
+[v _Configure_I2C `(v ~T0 @X0 1 ef ]
+"251
+{
+[; ;system.c: 250: void Configure_I2C(void)
+[; ;system.c: 251: {
+[e :U _Configure_I2C ]
+[f ]
+[; ;system.c: 252: SSPSTAT &= 0x3F;
+"252
+[e =& _SSPSTAT -> -> 63 `i `uc ]
+[; ;system.c: 253: SSPCON1 = 0x00;
+"253
+[e = _SSPCON1 -> -> 0 `i `uc ]
+[; ;system.c: 254: SSPCON2 = 0x00;
+"254
+[e = _SSPCON2 -> -> 0 `i `uc ]
+[; ;system.c: 255: SSPCON1 |= 0x8;
+"255
+[e =| _SSPCON1 -> -> 8 `i `uc ]
+[; ;system.c: 256: SSPSTATbits.SMP=1;
+"256
+[e = . . _SSPSTATbits 2 7 -> -> 1 `i `uc ]
+[; ;system.c: 258: PORTCbits.RC3 = 1;
+"258
+[e = . . _PORTCbits 0 3 -> -> 1 `i `uc ]
+[; ;system.c: 259: PORTCbits.RC4 = 1;
+"259
+[e = . . _PORTCbits 0 4 -> -> 1 `i `uc ]
+[; ;system.c: 261: SSPCON1bits.SSPEN = 1;
+"261
+[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
+[; ;system.c: 262: SSPADD = 0x54;
+"262
+[e = _SSPADD -> -> 84 `i `uc ]
+[; ;system.c: 263: }
+"263
+[e :UE 2680 ]
+}
+"265
+[v _Idle_I2C `(v ~T0 @X0 1 ef ]
+"266
+{
+[; ;system.c: 265: void Idle_I2C( void )
+[; ;system.c: 266: {
+[e :U _Idle_I2C ]
+[f ]
+[; ;system.c: 267: while ( ( SSPCON2 & 0x1F ) || ( SSPSTATbits.R_W ) )
+"267
+[e $U 2682  ]
+[e :U 2683 ]
+[; ;system.c: 268: continue;
+"268
+[e $U 2682  ]
+[e :U 2682 ]
+"267
+[e $ || != & -> _SSPCON2 `i -> 31 `i -> 0 `i != -> . . _SSPSTATbits 3 1 `i -> -> -> 0 `i `Vuc `i 2683  ]
+[e :U 2684 ]
+[; ;system.c: 269: }
+"269
+[e :UE 2681 ]
+}
+"271
+[v _Read_I2C `(uc ~T0 @X0 1 ef ]
+"272
+{
+[; ;system.c: 271: unsigned char Read_I2C( void )
+[; ;system.c: 272: {
+[e :U _Read_I2C ]
+[f ]
+[; ;system.c: 273: Idle_I2C();
+"273
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 274: SSPCON2bits.RCEN = 1;
+"274
+[e = . . _SSPCON2bits 0 3 -> -> 1 `i `uc ]
+[; ;system.c: 275: while ( !SSPSTATbits.BF );
+"275
+[e $U 2686  ]
+[e :U 2687 ]
+[e :U 2686 ]
+[e $ ! != -> . . _SSPSTATbits 2 0 `i -> -> -> 0 `i `Vuc `i 2687  ]
+[e :U 2688 ]
+[; ;system.c: 276: return ( SSPBUF );
+"276
+[e ) _SSPBUF ]
+[e $UE 2685  ]
+[; ;system.c: 277: }
+"277
+[e :UE 2685 ]
+}
+"279
+[v _Write_I2C `(c ~T0 @X0 1 ef1`uc ]
+"280
+{
+[; ;system.c: 279: signed char Write_I2C( unsigned char data_out )
+[; ;system.c: 280: {
+[e :U _Write_I2C ]
+"279
+[v _data_out `uc ~T0 @X0 1 r1 ]
+"280
+[f ]
+[; ;system.c: 281: SSPBUF = data_out;
+"281
+[e = _SSPBUF _data_out ]
+[; ;system.c: 282: if ( SSPCON1bits.WCOL )
+"282
+[e $ ! != -> . . _SSPCON1bits 0 4 `i -> -> -> 0 `i `Vuc `i 2690  ]
+[; ;system.c: 283: return ( -1 );
+"283
+[e ) -> -U -> 1 `i `c ]
+[e $UE 2689  ]
+[e $U 2691  ]
+"284
+[e :U 2690 ]
+[; ;system.c: 284: else
+[; ;system.c: 285: {
+"285
+{
+[; ;system.c: 286: while( SSPSTATbits.BF );
+"286
+[e $U 2692  ]
+[e :U 2693 ]
+[e :U 2692 ]
+[e $ != -> . . _SSPSTATbits 2 0 `i -> -> -> 0 `i `Vuc `i 2693  ]
+[e :U 2694 ]
+[; ;system.c: 287: Idle_I2C();
+"287
+[e ( _Idle_I2C ..  ]
+[; ;system.c: 288: if ( SSPCON2bits.ACKSTAT )
+"288
+[e $ ! != -> . . _SSPCON2bits 0 6 `i -> -> -> 0 `i `Vuc `i 2695  ]
+[; ;system.c: 289: return ( -2 );
+"289
+[e ) -> -U -> 2 `i `c ]
+[e $UE 2689  ]
+[e $U 2696  ]
+"290
+[e :U 2695 ]
+[; ;system.c: 290: else return ( 0 );
+[e ) -> -> 0 `i `c ]
+[e $UE 2689  ]
+[e :U 2696 ]
+"293
+}
+[e :U 2691 ]
+[; ;system.c: 293: }
+[; ;system.c: 294: }
+"294
+[e :UE 2689 ]
+}
+"296
+[v _Start_I2C `(v ~T0 @X0 1 ef ]
+"297
+{
+[; ;system.c: 296: void Start_I2C(void)
+[; ;system.c: 297: {
+[e :U _Start_I2C ]
+[f ]
+[; ;system.c: 298: SSPCON2bits.SEN=1;
+"298
+[e = . . _SSPCON2bits 0 0 -> -> 1 `i `uc ]
+[; ;system.c: 299: while(SSPCON2bits.SEN);
+"299
+[e $U 2698  ]
+[e :U 2699 ]
+[e :U 2698 ]
+[e $ != -> . . _SSPCON2bits 0 0 `i -> -> -> 0 `i `Vuc `i 2699  ]
+[e :U 2700 ]
+[; ;system.c: 300: }
+"300
+[e :UE 2697 ]
+}
+"302
+[v _Stop_I2C `(v ~T0 @X0 1 ef ]
+"303
+{
+[; ;system.c: 302: void Stop_I2C()
+[; ;system.c: 303: {
+[e :U _Stop_I2C ]
+[f ]
+[; ;system.c: 304: SSPCON2bits.PEN=1;
+"304
+[e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
+[; ;system.c: 305: while(SSPCON2bits.PEN);
+"305
+[e $U 2702  ]
+[e :U 2703 ]
+[e :U 2702 ]
+[e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2703  ]
+[e :U 2704 ]
+[; ;system.c: 306: }
+"306
+[e :UE 2701 ]
+}
+"308
+[v _NotAck_I2C `(v ~T0 @X0 1 ef ]
+"309
+{
+[; ;system.c: 308: void NotAck_I2C(void)
+[; ;system.c: 309: {
+[e :U _NotAck_I2C ]
+[f ]
+[; ;system.c: 310: SSPCON2bits.ACKDT=1;
+"310
+[e = . . _SSPCON2bits 0 5 -> -> 1 `i `uc ]
+[; ;system.c: 311: SSPCON2bits.ACKEN=1;
+"311
+[e = . . _SSPCON2bits 0 4 -> -> 1 `i `uc ]
+[; ;system.c: 312: while(SSPCON2bits.ACKEN);
+"312
+[e $U 2706  ]
+[e :U 2707 ]
+[e :U 2706 ]
+[e $ != -> . . _SSPCON2bits 0 4 `i -> -> -> 0 `i `Vuc `i 2707  ]
+[e :U 2708 ]
+[; ;system.c: 313: }
+"313
+[e :UE 2705 ]
+}
+"315
+[v _GetActuatorPosition `(uc ~T0 @X0 1 ef ]
+"316
+{
+[; ;system.c: 315: char GetActuatorPosition(void)
+[; ;system.c: 316: {
 [e :U _GetActuatorPosition ]
 [f ]
-"126
+"317
 [v _adc_result `ui ~T0 @X0 1 a ]
-[; ;system.c: 126: unsigned int adc_result;
-[; ;system.c: 128: ADCON0bits.GO=1;
-"128
+[; ;system.c: 317: unsigned int adc_result;
+[; ;system.c: 319: ADCON0bits.GO=1;
+"319
 [e = . . _ADCON0bits 3 1 -> -> 1 `i `uc ]
-[; ;system.c: 129: while(ADCON0bits.GO==1);
-"129
-[e $U 2678  ]
-[e :U 2679 ]
-[e :U 2678 ]
-[e $ == -> . . _ADCON0bits 3 1 `i -> 1 `i 2679  ]
-[e :U 2680 ]
-[; ;system.c: 130: adc_result=(ADRESH);
-"130
+[; ;system.c: 320: while(ADCON0bits.GO==1);
+"320
+[e $U 2710  ]
+[e :U 2711 ]
+[e :U 2710 ]
+[e $ == -> . . _ADCON0bits 3 1 `i -> 1 `i 2711  ]
+[e :U 2712 ]
+[; ;system.c: 321: adc_result=(ADRESH);
+"321
 [e = _adc_result -> _ADRESH `ui ]
-[; ;system.c: 131: adc_result=adc_result<<8;
-"131
+[; ;system.c: 322: adc_result=adc_result<<8;
+"322
 [e = _adc_result << _adc_result -> 8 `i ]
-[; ;system.c: 132: adc_result=adc_result | ADRESL;
-"132
+[; ;system.c: 323: adc_result=adc_result | ADRESL;
+"323
 [e = _adc_result | _adc_result -> _ADRESL `ui ]
-[; ;system.c: 134: adc_result=adc_result/34;
-"134
+[; ;system.c: 325: adc_result=adc_result/34;
+"325
 [e = _adc_result / _adc_result -> -> 34 `i `ui ]
-[; ;system.c: 136: if(adc_result>100)
-"136
-[e $ ! > _adc_result -> -> 100 `i `ui 2681  ]
-[; ;system.c: 137: adc_result=100;
-"137
+[; ;system.c: 327: if(adc_result>100)
+"327
+[e $ ! > _adc_result -> -> 100 `i `ui 2713  ]
+[; ;system.c: 328: adc_result=100;
+"328
 [e = _adc_result -> -> 100 `i `ui ]
-[e :U 2681 ]
-[; ;system.c: 140: return (char) adc_result;
-"140
+[e :U 2713 ]
+[; ;system.c: 331: return (char) adc_result;
+"331
 [e ) -> _adc_result `uc ]
-[e $UE 2677  ]
-[; ;system.c: 142: }
-"142
-[e :UE 2677 ]
+[e $UE 2709  ]
+[; ;system.c: 333: }
+"333
+[e :UE 2709 ]
 }
